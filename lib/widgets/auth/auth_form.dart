@@ -52,7 +52,9 @@ class _AuthFormState extends State<AuthForm> {
                           padding: const EdgeInsets.all(12.0),
                           textStyle: const TextStyle(fontSize: 15),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+
+                        },
                         child: const Text('Login'),
                       ),
                     ],
