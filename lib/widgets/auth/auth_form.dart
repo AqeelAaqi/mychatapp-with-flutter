@@ -18,15 +18,15 @@ class _AuthFormState extends State<AuthForm> {
               children: <Widget>[
                 TextFormField(
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(labelText: 'Email Address'),
+                  decoration: const InputDecoration(labelText: 'Email Address'),
                 ),
                 TextFormField(
                   keyboardType: TextInputType.text,
-                  decoration: InputDecoration(labelText: 'User Name'),
+                  decoration: const InputDecoration(labelText: 'User Name'),
                 ),
                 TextFormField(
                   obscureText: true,
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: const InputDecoration(labelText: 'Password'),
                 ),
                 const SizedBox(height: 12,),
                 ClipRRect(

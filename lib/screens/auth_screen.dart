@@ -12,7 +12,7 @@ class _AuthScreenState extends State<AuthScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(title: Text(''),),
+      appBar: AppBar(title: Text('Login'),),
       body: AuthForm(),
     );
   }
