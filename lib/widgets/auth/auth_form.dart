@@ -30,7 +30,7 @@ class _AuthFormState extends State<AuthForm> {
                 ),
                 const SizedBox(height: 12,),
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(30),
                   child: Stack(
                     children: <Widget>[
                       Positioned.fill(
@@ -38,9 +38,9 @@ class _AuthFormState extends State<AuthForm> {
                           decoration: const BoxDecoration(
                             gradient: LinearGradient(
                               colors: <Color>[
-                                Color(0xFF0D47A1),
-                                Color(0xFF1976D2),
-                                Color(0xFF42A5F5),
+                                Color(0xFFD81B60),
+                                Color(0xFFEC407A),
+                                Color(0xFFF48FB1),
                               ],
                             ),
                           ),
@@ -49,18 +49,16 @@ class _AuthFormState extends State<AuthForm> {
                       TextButton(
                         style: TextButton.styleFrom(
                           foregroundColor: Colors.white,
-                          padding: const EdgeInsets.all(12.0),
+                          padding: const EdgeInsets.only(left: 30.0, right: 30.0),
                           textStyle: const TextStyle(fontSize: 15),
                         ),
-                        onPressed: () {
-
-                        },
+                        onPressed: () {},
                         child: const Text('Login'),
                       ),
                     ],
                   ),
                 ),
-                TextButton(onPressed: (){}, child: const Text('Create New Account')),
+                TextButton(onPressed: (){}, child: const Text('Create New Account'),),
               ],
             ),
           ),
