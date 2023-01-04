@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
 
-  AuthForm(this.submitFn);
+  AuthForm(this.submitFn, this.isLoading);
+  final bool isLoading;
 
   final void Function(String email, String password, String userName, bool isLogin, BuildContext ctx) submitFn;
   _AuthFormState createState() => _AuthFormState();
@@ -85,6 +86,9 @@ class _AuthFormState extends State<AuthForm> {
                 const SizedBox(
                   height: 12,
                 ),
+                if(widget.isLoading)
+                  CircularProgressIndicator(),
+                if(!widget.isLoading)
                 FilledButton(
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.white,
@@ -94,6 +98,7 @@ class _AuthFormState extends State<AuthForm> {
                   onPressed: _trySubmit,
                   child: Text(_isLogin ? 'Login' : 'Signup'),
                 ),
+                if(!widget.isLoading)
                 TextButton(
                   onPressed: () {
                     setState(() {
