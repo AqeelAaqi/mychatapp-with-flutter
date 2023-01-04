@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
+
+  AuthForm(this.submitFn);
+
+  final void Function(String email, String password, String userName, bool isLogin) submitFn;
   _AuthFormState createState() => _AuthFormState();
 }
 
@@ -18,6 +22,8 @@ class _AuthFormState extends State<AuthForm> {
 
     if (isValid!) {
       _formKey.currentState?.save();
+      widget.submitFn(_userEmail, _userPassword, _userName, _isLogin);
+
     }
   }
 
@@ -25,16 +31,16 @@ class _AuthFormState extends State<AuthForm> {
   Widget build(BuildContext context) {
     return Center(
       child: Card(
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 TextFormField(
-                  key: ValueKey('email'),
+                  key: const ValueKey('email'),
                   validator: (value) {
                     if (value!.isEmpty || !value.contains('@')) {
                       return 'Please enter a valid email address';
@@ -49,7 +55,7 @@ class _AuthFormState extends State<AuthForm> {
                 ),
                 if (!_isLogin)
                   TextFormField(
-                    key: ValueKey('username'),
+                    key: const ValueKey('username'),
                     validator: (value) {
                       if (value!.isEmpty || value.length < 4) {
                         return 'Please enter at least 4 character';
@@ -63,7 +69,7 @@ class _AuthFormState extends State<AuthForm> {
                     decoration: const InputDecoration(labelText: 'User Name'),
                   ),
                 TextFormField(
-                  key: ValueKey('password'),
+                  key: const ValueKey('password'),
                   validator: (value) {
                     if (value!.isEmpty || value.length < 7) {
                       return 'Password must be at least 7 character long';
