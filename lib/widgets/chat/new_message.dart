@@ -18,7 +18,7 @@ class _NewMessageState extends State<NewMessage> {
       'text': _enteredMessage,
       'createdAt': Timestamp.now(),
       'userId': user.uid,
-      'username': userData['userName'],
+      'userName': userData['userName'],
     });
     _textController.clear();
   }
