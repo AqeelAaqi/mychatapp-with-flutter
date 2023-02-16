@@ -13,14 +13,20 @@ class _NewMessageState extends State<NewMessage> {
   void _sendMessage() async {
     FocusScope.of(context).unfocus();
     final user = FirebaseAuth.instance.currentUser;
-    final userData = await FirebaseFirestore.instance.collection('users').doc(user!.uid).get();
+    final userData = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user!.uid)
+        .get();
     FirebaseFirestore.instance.collection('chat').add({
       'text': _enteredMessage,
       'createdAt': Timestamp.now(),
       'userId': user.uid,
-      'userName': userData['userName'],
+      'username': userData['username'],
     });
-    _textController.clear();
+    setState(() {
+      _enteredMessage = '';
+      _textController.clear();
+    });
   }
 
   @override
@@ -32,8 +38,13 @@ class _NewMessageState extends State<NewMessage> {
         children: <Widget>[
           Expanded(
             child: TextField(
-              controller: _textController ,
-              decoration: InputDecoration(labelText: 'Send a message...'),
+              controller: _textController,
+              decoration: const InputDecoration(
+                labelText: 'Send a message...',
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.redAccent, width: 1.0),
+                ),
+              ),
               onChanged: (value) {
                 setState(() {
                   _enteredMessage = value;
@@ -43,7 +54,7 @@ class _NewMessageState extends State<NewMessage> {
           ),
           IconButton(
             onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
-            icon: Icon(Icons.send),
+            icon: const Icon(Icons.send),
             color: Theme.of(context).primaryColor,
           )
         ],
