@@ -38,14 +38,18 @@ class _AuthScreenState extends State<AuthScreen> {
             .child("user_images")
             .child('$uid.jpg');
 
-        await ref.putFile(image).whenComplete(() => {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Image uploaded successfully")))});
+        await ref.putFile(image);
+        //.whenComplete(() => {ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Image uploaded successfully")))});
+        final url = await ref.getDownloadURL();
+        print(url);
 
         await FirebaseFirestore.instance
             .collection('users')
             .doc(authResult.user?.uid)
             .set({
-          'userName': userName,
+          'username': userName,
           'email': email,
+          'image_url' : url,
         });
       }
     } on PlatformException catch (error) {

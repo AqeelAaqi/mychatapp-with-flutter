@@ -7,8 +7,8 @@ class AuthForm extends StatefulWidget {
   const AuthForm(this.submitFn, this.isLoading, {super.key});
   final bool isLoading;
 
-  final void Function(String email, String password, String userName, File image,
-      bool isLogin, BuildContext ctx) submitFn;
+  final void Function(String email, String password, String userName,
+      File image, bool isLogin, BuildContext ctx) submitFn;
   @override
   _AuthFormState createState() => _AuthFormState();
 }
@@ -20,7 +20,7 @@ class _AuthFormState extends State<AuthForm> {
   String _userEmail = '';
   String _userName = '';
   String _userPassword = '';
-  File? _userImageFile;
+  late File _userImageFile = File("");
 
   void _pickedImage(File image) {
     _userImageFile = image;
@@ -31,15 +31,19 @@ class _AuthFormState extends State<AuthForm> {
     FocusScope.of(context).unfocus();
 
     if (_userImageFile == null && !_isLogin) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Please pick an image."), backgroundColor: Theme.of(context).errorColor,));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text("Please pick an image."),
+          backgroundColor: Theme.of(context).errorColor,
+        ),
+      );
       return;
     }
 
     if (isValid!) {
       _formKey.currentState?.save();
-      widget.submitFn(_userEmail.trim(), _userPassword.trim(), _userName.trim(), _userImageFile!,
-          _isLogin, context);
+      widget.submitFn(_userEmail.trim(), _userPassword.trim(), _userName.trim(),
+          _userImageFile, _isLogin, context);
     }
   }
 
