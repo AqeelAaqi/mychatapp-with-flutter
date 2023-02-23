@@ -17,9 +17,18 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   initState() {
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-
     super.initState();
+    //foreground messaging
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+      // Navigator.pushNamed(context, '/message',
+      //     arguments: MessageArguments(message, true));
+    });
   }
   @override
   Widget build(BuildContext context) {
@@ -28,6 +37,7 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Text('Flutter Chat'),
         actions: <Widget>[
           DropdownButton(
+            underline: Container(),
             items: [
               DropdownMenuItem(
                 child: Container(
